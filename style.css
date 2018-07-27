@@ -1,0 +1,18 @@
+body{
+  text-align: center;
+}
+
+#map {
+  height: 600px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+
+.lightStatus{
+  color: white;
+  font-family: Verdana;
+}
+.lightButton{
+  font-size: 1.5em;
+  font-family: Verdana;
+  padding: 10px;
+}

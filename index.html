@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Youtube Tutorial</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <iframe
+      id="golek"
+      width="100%"
+      height="500"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCbl5qfPlb3phfW0Y_YsNXHgTnY4pPwGlY&q=-7,110" allowfullscreen>
+    </iframe>
+    <!-- <div id="map"></div> -->
+  </body>
+
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyByEPiVnxDq4Ib34JUpVl61zC3Y_BxfEko",
+    authDomain: "testing-93b29.firebaseapp.com",
+    databaseURL: "https://testing-93b29.firebaseio.com",
+    projectId: "testing-93b29",
+    storageBucket: "testing-93b29.appspot.com",
+    messagingSenderId: "581937931474"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+  var loc;
+
+
+
+  // The location of Uluru
+  database.ref().on("value", function(snap){
+    loc = snap.val().location;
+    console.log(loc.lat);
+    console.log(loc.lng);
+
+    var lintang = loc.lat;
+    var bujur = loc.lng;
+
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+
+    $("#golek").attr("src", "https://www.google.com/maps/embed/v1/place?key=AIzaSyCbl5qfPlb3phfW0Y_YsNXHgTnY4pPwGlY&q="+lintang+","+bujur);
+
+    // The location of Uluru
+    var uluru = {lat: lintang, lng: bujur};
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 17, center: uluru});
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({position: uluru, map: map});
+  });
+
+
+
+
+</script>
+
+<script src="script.js"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbl5qfPlb3phfW0Y_YsNXHgTnY4pPwGlY&callback=initMap">
+</script>
+</html>
